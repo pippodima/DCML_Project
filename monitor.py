@@ -53,8 +53,8 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
                     print(f"Free Disk Space: {disk_info.free} bytes")
                     print(f"Disk Usage Percentage: {disk_info.percent}%")
                     print("--------------------------------")
-                    # info['DISK'] = disk_info.percent
-                    info['DISK'] = (psutil.disk_io_counters().read_bytes, psutil.disk_io_counters().write_bytes)
+                    info['DISK'] = disk_info.free
+                    # info['DISK'] = (psutil.disk_io_counters().read_bytes, psutil.disk_io_counters().write_bytes)
 
 
                 # NETWORK
@@ -89,4 +89,4 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
 
 if __name__ == "__main__":
     # Monitor CPU usage for 10 seconds
-    monitor(duration=10, CPU=None, BATTERY=None, DISK=None)
+    monitor(duration=15, CPU=None, BATTERY=None, DISK=None)
