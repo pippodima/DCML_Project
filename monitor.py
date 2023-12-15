@@ -18,7 +18,7 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
 
     """
     start_time = time.time()
-    with open(path + 'monitoring_values.csv', "w+") as csvFile:
+    with open(path + 'monitored_values.csv', "w+") as csvFile:
         fieldnames = ['TIMESTAMP'] + ",".join(kwargs.keys()).split(',')
         writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
         writer.writeheader()
