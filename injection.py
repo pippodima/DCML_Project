@@ -26,12 +26,11 @@ def inject_stress_cpu(duration=5, num_cpus=1):
 def stress_disk(writing_times=10):
     while True:
         writing_string = ''.join(random.choices(string.ascii_letters + string.digits, k=1024))
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        with tempfile.NamedTemporaryFile() as temp_file:
             for _ in range(writing_times):
                 temp_file.write(writing_string.encode('utf-8'))
             temp_file.seek(0)
             temp_file.read()
-            os.remove(temp_file.name)
 
 
 def injection_stress_disk(duration=5, num_cpus=1, writing_times=10):
