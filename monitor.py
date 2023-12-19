@@ -22,7 +22,7 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
         if arg == 'CPU':
             fieldnames.extend(['CPU_PERCENT', 'CPU_FREQUENCY'])
         if arg == 'MEMORY':
-            fieldnames.extend(['MEMORY_USED', 'MEMORY_FREE'])
+            fieldnames.extend(['MEMORY_USED', 'MEMORY_FREE', 'MEMORY_PERCENT'])
         if arg == 'DISK':
             fieldnames.extend(['DISK_USED', 'DISK_FREE', 'DISK_BYTE_READ', 'DISK_BYTE_WROTE'])
         if arg == 'NETWORK':
@@ -42,12 +42,15 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
                 # CPU
                 if "CPU" in kwargs.keys():
                     info['CPU_PERCENT'] = psutil.cpu_percent()
-                    info['CPU_FREQUENCY'] = psutil.cpu_freq().current
-
+                    try:
+                        info['CPU_FREQUENCY'] = psutil.cpu_freq().current
+                    except FileNotFoundError:
+                        info['CPU_FREQUENCY'] = None
                 # MEMORY
                 if "MEMORY" in kwargs.keys():
                     info['MEMORY_USED'] = psutil.virtual_memory().used
                     info['MEMORY_FREE'] = psutil.virtual_memory().free
+                    info['MEMORY_PERCENT'] = psutil.virtual_memory().percent
 
                 # DISK
                 if "DISK" in kwargs.keys():
@@ -72,7 +75,6 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
                     print('il pc non supporta la batteria')
                     info['BATTERY_PERCENT'] = None
                     info['BATTERY_PLUGGED'] = None
-                    pass
                 writer.writerow(info)
 
                 if duration and (time.time() - start_time) >= duration:
