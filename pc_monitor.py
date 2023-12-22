@@ -10,7 +10,7 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
         duration: running time in seconds
         **kwargs: insert what parameter you want to monitor.
                   choose from:
-                  CPU, MEMORY, DISK, NETWORK, BATTERY (if on a laptop)
+                  CPU, MEMORY, DISK, NETWORK, BATTERY (if on a laptop), MOUSE, KEYBOARD
                   Example:
                       monitor(path = pathname, duration = 10, CPU=None, DISK=None)
 
@@ -75,6 +75,7 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
                     print('il pc non supporta la batteria')
                     info['BATTERY_PERCENT'] = None
                     info['BATTERY_PLUGGED'] = None
+
                 writer.writerow(info)
 
                 if duration and (time.time() - start_time) >= duration:
@@ -82,3 +83,5 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
 
         except KeyboardInterrupt:
             pass
+
+
