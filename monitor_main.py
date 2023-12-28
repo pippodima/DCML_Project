@@ -6,17 +6,28 @@ from keyboard_monitor import KeyboardMonitor
 import threading
 
 
-def start_monitor():
-    keyboard_monitor = KeyboardMonitor()
+def start_keyboard_monitor(interval):
+    keys_to_monitor = ['q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']
+
+    keyboard_monitor = KeyboardMonitor(keys_to_monitor, interval=interval)
     keyboard_monitor.start()
-    mouse_monitor = MouseMonitor()
+
+
+    # keyboard_monitor_thread = Thread(target=keyboard_monitor.start)
+    # keyboard_monitor_thread.start()
+
+
+def start_mouse_monitor(interval):
+    mouse_monitor = MouseMonitor(interval=interval)
     mouse_monitor.start()
-    time.sleep(10)
-    # monitor(duration=15, MEMORY=None)
+
+
+def start_monitor(interval):
+    start_keyboard_monitor(interval=interval)
+    start_mouse_monitor(interval=interval)
+    # monitor(duration=15, MEMORY=None, CPU=None)
 
 
 if __name__ == "__main__":
-    start_monitor()
-
-#  TODO: provare a salvare la posizione del mouse una volta ogni t tempo
-
+    interval = 1
+    start_monitor(interval=interval)
