@@ -3,11 +3,13 @@ from threading import Timer
 
 
 class KeyboardMonitor:
-    def __init__(self, keys, interval):
-        self.listener = keyboard.Listener(on_press=self.on_press, on_release=self.on_release)
+    def __init__(self, keys, interval, verbose=False):
+        self.listener = keyboard.Listener(on_press=self.on_press)
         self.keys = keys
         self.interval = interval
         self.key_counts = {key: 0 for key in keys}
+        self.queue = []
+        self.verbose = verbose
 
     def start(self):
         self.listener.start()
@@ -30,19 +32,20 @@ class KeyboardMonitor:
         elif key == keyboard.Key.ctrl:
             self.key_counts['ctrl'] += 1
 
-    def on_release(self, key):
-        pass
 
     def print_counts(self):
-        print("Key Counts:")
-        for key, count in self.key_counts.items():
-            print(f"{key}: {count}")
-        print("------")
+        if self.verbose:
+            print("Key Counts:")
+            for key, count in self.key_counts.items():
+                print(f"{key}: {count}")
+            print("------")
+
+        self.queue.append(self.key_counts)
 
         # Reset counts for the next second
         self.key_counts = {key: 0 for key in self.keys}
 
-        # Schedule the function to run again after 1 second
+        # Schedule the function to run again after interval time
         self.schedule_print_counts()
 
     def schedule_print_counts(self):
