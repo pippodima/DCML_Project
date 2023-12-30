@@ -31,7 +31,7 @@ def monitor(path='', duration=None, **kwargs):  # interval and duration in secon
             fieldnames.extend(['BATTERY_PERCENT', 'BATTERY_PLUGGED'])
 
     start_time = time.time()
-    with open(path + 'monitored_values.csv', "w+") as csvFile:
+    with open(path + 'monitored_values_old.csv', "w+") as csvFile:
         writer = csv.DictWriter(csvFile, fieldnames=fieldnames)
         writer.writeheader()
         try:

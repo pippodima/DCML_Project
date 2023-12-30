@@ -10,6 +10,7 @@ class KeyboardMonitor:
         self.key_counts = {key: 0 for key in keys}
         self.queue = []
         self.verbose = verbose
+        self.s = False
 
     def start(self):
         self.listener.start()
@@ -17,6 +18,7 @@ class KeyboardMonitor:
 
     def stop(self):
         self.listener.stop()
+        self.s = True
 
     def on_press(self, key):
         try:
@@ -42,14 +44,11 @@ class KeyboardMonitor:
 
         self.queue.append(self.key_counts)
 
-        # Reset counts for the next second
         self.key_counts = {key: 0 for key in self.keys}
 
-        # Schedule the function to run again after interval time
-        self.schedule_print_counts()
+        if not self.s: self.schedule_print_counts()
 
     def schedule_print_counts(self):
-        # Schedule the print function to run periodically
         Timer(self.interval, self.print_counts).start()
 
 

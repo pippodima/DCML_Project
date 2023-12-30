@@ -11,6 +11,7 @@ class MouseMonitor:
         self.log = {'MOUSE_POSITION': (0.0, 0.0), 'LEFT_CLICKS': 0, 'RIGHT_CLICKS': 0}
         self.queue = []
         self.verbose = verbose
+        self.s = False
 
     def start(self):
         self.listener.start()
@@ -18,6 +19,7 @@ class MouseMonitor:
 
     def stop(self):
         self.listener.stop()
+        self.s = True
 
     def on_click(self, x, y, button, pressed):
         if button == mouse.Button.left:
@@ -40,15 +42,12 @@ class MouseMonitor:
         self.log['MOUSE_POSITION'] = mouse.Controller().position
         self.queue.append(self.log)
 
-        # Reset counts for the next second
         self.log['LEFT_CLICKS'] = 0
         self.log['RIGHT_CLICKS'] = 0
 
-        # Schedule the function to run again after 1 second
-        self.schedule_print_counts_and_position()
+        if not self.s: self.schedule_print_counts_and_position()
 
     def schedule_print_counts_and_position(self):
-        # Schedule the print function to run periodically
         Timer(self.interval, self.print_counts_and_position).start()
 
 

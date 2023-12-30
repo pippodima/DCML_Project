@@ -8,9 +8,13 @@ class StatsMonitor:
         self.stats = {'CPU': 0.0, 'MEMORY': 0.0}
         self.queue = []
         self.verbose = verbose
+        self.s = False
 
     def start(self):
         self.schedule_print_usage()
+
+    def stop(self):
+        self.s = True
 
     def print_usages(self):
         self.stats['CPU'] = psutil.cpu_percent()
@@ -23,7 +27,7 @@ class StatsMonitor:
 
         self.queue.append(self.stats)
 
-        self.schedule_print_usage()
+        if not self.s: self.schedule_print_usage()
 
     def schedule_print_usage(self):
         Timer(self.interval, self.print_usages).start()
