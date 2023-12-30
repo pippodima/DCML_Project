@@ -17,13 +17,13 @@ class CompleteMonitor:
 
         self.fieldnames = ['TIMESTAMP', 'CPU', 'MEMORY', 'MOUSE_POSITION', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e',
                            'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']
-        self.csvFile = open('monitored_values.csv', 'w+')
+        self.csvFile = open('FirstAram.csv', 'w+')
         self.writer = csv.DictWriter(self.csvFile, fieldnames=self.fieldnames)
 
         self.log = {}
         self.verbose = verbose
 
-        self.s = False
+        self.arrest = False
 
     def start_monitor(self):
         self.writer.writeheader()
@@ -41,18 +41,20 @@ class CompleteMonitor:
             stats_data = self.stats_monitor.queue.pop()
 
             self.log = {**self.log, **stats_data, **mouse_data, **keyboard_data}
-            if self.verbose: print(self.log)
-            self.writer.writerow(self.log)
-            self.csvFile.flush()
-        if not self.s: self.schedule_write_row()
+            if self.verbose:
+                print(self.log)
+            if not self.csvFile.closed:
+                self.writer.writerow(self.log)
+                self.csvFile.flush()
+        if not self.arrest:
+            self.schedule_write_row()
 
     def schedule_write_row(self):
         Timer(self.interval, self.write_row).start()
 
     def stop(self):
-        self.s = True
+        self.arrest = True
         self.stats_monitor.stop()
         self.mouse_monitor.stop()
         self.keyboard_monitor.stop()
         self.csvFile.close()
-

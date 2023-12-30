@@ -2,7 +2,7 @@ from CompleteMonitor import CompleteMonitor
 import time
 
 if __name__ == "__main__":
-    interval = 1
+    interval = 0.5
     monitor = CompleteMonitor(interval=interval, verbose=True)
     monitor.start_monitor()
     try:
@@ -11,4 +11,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         monitor.stop()
         print("Monitoring stopped by user.")
-

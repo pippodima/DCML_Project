@@ -10,7 +10,7 @@ class KeyboardMonitor:
         self.key_counts = {key: 0 for key in keys}
         self.queue = []
         self.verbose = verbose
-        self.s = False
+        self.arrest = False
 
     def start(self):
         self.listener.start()
@@ -18,7 +18,7 @@ class KeyboardMonitor:
 
     def stop(self):
         self.listener.stop()
-        self.s = True
+        self.arrest = True
 
     def on_press(self, key):
         try:
@@ -34,7 +34,6 @@ class KeyboardMonitor:
         elif key == keyboard.Key.ctrl:
             self.key_counts['ctrl'] += 1
 
-
     def print_counts(self):
         if self.verbose:
             print("Key Counts:")
@@ -46,7 +45,7 @@ class KeyboardMonitor:
 
         self.key_counts = {key: 0 for key in self.keys}
 
-        if not self.s: self.schedule_print_counts()
+        if not self.arrest: self.schedule_print_counts()
 
     def schedule_print_counts(self):
         Timer(self.interval, self.print_counts).start()
