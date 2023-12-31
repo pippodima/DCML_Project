@@ -17,7 +17,7 @@ class CompleteMonitor:
 
         self.fieldnames = ['TIMESTAMP', 'CPU', 'MEMORY', 'MOUSE_POSITION', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e',
                            'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']
-        self.csvFile = open('FirstAram.csv', 'w+')
+        self.csvFile = open('monitored_values.csv', 'w+')
         self.writer = csv.DictWriter(self.csvFile, fieldnames=self.fieldnames)
 
         self.log = {}
