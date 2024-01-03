@@ -3,7 +3,7 @@ import time
 
 if __name__ == "__main__":
     interval = 0.5
-    monitor = CompleteMonitor(interval=interval, verbose=True)
+    monitor = CompleteMonitor(interval=interval, verbose=False)
     monitor.start_monitor()
     try:
         while True:
