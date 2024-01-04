@@ -17,7 +17,7 @@ class StatsMonitor:
         self.arrest = True
 
     def print_usages(self):
-        self.stats['CPU'] = psutil.cpu_percent()
+        self.stats['CPU'] = psutil.cpu_percent(interval=self.interval)
         self.stats['MEMORY'] = psutil.virtual_memory().percent
         if self.verbose:
             print('Stats:')
@@ -25,7 +25,7 @@ class StatsMonitor:
                 print(f'{key}: {value}')
             print('--------------')
 
-        self.queue.append(self.stats)
+        self.queue.append(self.stats.copy())
 
         if not self.arrest: self.schedule_print_usage()
 

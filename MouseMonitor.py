@@ -38,9 +38,9 @@ class MouseMonitor:
             print(f"Left Clicks: {self.log['LEFT_CLICKS']}")
             print(f"Right Clicks: {self.log['RIGHT_CLICKS']}")
             print("------")
-
+        # TODO: append di singoli valori e non di una tupla
         self.log['MOUSE_POSITION'] = mouse.Controller().position
-        self.queue.append(self.log)
+        self.queue.append(self.log.copy())
 
         self.log['LEFT_CLICKS'] = 0
         self.log['RIGHT_CLICKS'] = 0

@@ -41,7 +41,7 @@ class KeyboardMonitor:
                 print(f"{key}: {count}")
             print("------")
 
-        self.queue.append(self.key_counts)
+        self.queue.append(self.key_counts.copy())
 
         self.key_counts = {key: 0 for key in self.keys}
 
