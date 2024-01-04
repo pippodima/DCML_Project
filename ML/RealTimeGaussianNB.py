@@ -1,9 +1,7 @@
-import pandas as pd
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
-
 import pickle
+import time
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
 filepath = "Data/copy_FirstGame.csv"
 filepath_anomaly = "Data/ezbot.csv"
@@ -24,16 +22,15 @@ combined_df = pd.concat([df, df_anomaly], ignore_index=True)
 
 X = combined_df[['CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
 Y = combined_df[['anomaly']]
+
 x_Train, x_Test, y_Train, y_Test = train_test_split(X, Y, test_size=0.2, shuffle=True)
 
-print(x_Train)
-classifier = GaussianNB()
-classifier.fit(x_Train, y_Train)
+with open('TrainedModels/trained_GaussianNB.pkl', 'rb') as file:
+    classifier = pickle.load(file)
 
-with open('TrainedModels/trained_GaussianNB.pkl', 'wb+') as file:
-    pickle.dump(classifier, file)
 
-predictions = classifier.predict(x_Test)
 
-print(accuracy_score(y_Test, predictions))
-print(predictions)
+for i in range(1, x_Test.shape[0]):
+    print(classifier.predict([x_Test.values[i]]))
+    print(y_Test.values[i])
+    time.sleep(1)

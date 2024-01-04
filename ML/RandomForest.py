@@ -3,8 +3,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 
-filepath = "copy_FirstGame.csv"
-filepath_anomaly = "ezbot.csv"
+filepath = "Data/copy_FirstGame.csv"
+filepath_anomaly = "Data/ezbot.csv"
 df = pd.read_csv(filepath)
 df['anomaly'] = 0
 df_anomaly = pd.read_csv(filepath_anomaly)

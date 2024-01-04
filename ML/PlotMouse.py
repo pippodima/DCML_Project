@@ -3,7 +3,7 @@ import pandas as pd
 import ast
 
 # Read the data from an external CSV file
-file_path = 'FirstGame.csv'
+file_path = 'Data/FirstGame.csv'
 df = pd.read_csv(file_path)
 
 # Extract mouse positions as tuples from the 'MOUSE_POSITION' column
