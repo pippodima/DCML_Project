@@ -1,7 +1,7 @@
 import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import classification_report, accuracy_score
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
 
 filepath = "copy_FirstGame.csv"
 filepath_anomaly = "ezbot.csv"
@@ -20,16 +20,12 @@ combined_df = pd.concat([df, df_anomaly], ignore_index=True)
 
 X = combined_df[['CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
 Y = combined_df[['anomaly']]
-
 x_Train, x_Test, y_Train, y_Test = train_test_split(X, Y, test_size=0.2, shuffle=False)
 
-classifier = RandomForestClassifier()
+
+classifier = KNeighborsClassifier()
 classifier.fit(x_Train, y_Train)
 
-predictions = classifier.predict(x_Test)
+preditions = classifier.predict(x_Test)
 
-accuracy = accuracy_score(y_Test, predictions)
-print('Accuracy: ', accuracy)
-
-print(classification_report(y_Test, predictions))
-
+print(accuracy_score(y_Test, preditions))
