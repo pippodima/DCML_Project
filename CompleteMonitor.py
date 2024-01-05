@@ -15,7 +15,7 @@ class CompleteMonitor:
         keys_to_monitor = ['q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']
         self.keyboard_monitor = KeyboardMonitor(keys_to_monitor, interval=self.interval)
 
-        self.fieldnames = ['TIMESTAMP', 'CPU', 'MEMORY', 'MOUSE_POSITION', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e',
+        self.fieldnames = ['TIMESTAMP', 'CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e',
                            'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']
         self.csvFile = open('monitored_values.csv', 'w+')
         self.writer = csv.DictWriter(self.csvFile, fieldnames=self.fieldnames)

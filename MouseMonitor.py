@@ -8,7 +8,7 @@ class MouseMonitor:
         self.interval = interval
         self.left_clicks = 0
         self.right_clicks = 0
-        self.log = {'MOUSE_POSITION': (0.0, 0.0), 'LEFT_CLICKS': 0, 'RIGHT_CLICKS': 0}
+        self.log = {'MOUSE_X': 0, 'MOUSE_Y': 0, 'LEFT_CLICKS': 0, 'RIGHT_CLICKS': 0}
         self.queue = []
         self.verbose = verbose
         self.arrest = False
@@ -34,12 +34,14 @@ class MouseMonitor:
 
     def print_counts_and_position(self):
         if self.verbose:
-            print(f"Mouse Position: {self.log['MOUSE_POSITION']}")
+            print(f"Mouse X: {self.log['MOUSE_X']}")
+            print(f"Mouse Y: {self.log['MOUSE_Y']}")
             print(f"Left Clicks: {self.log['LEFT_CLICKS']}")
             print(f"Right Clicks: {self.log['RIGHT_CLICKS']}")
             print("------")
-        # TODO: append di singoli valori e non di una tupla
-        self.log['MOUSE_POSITION'] = mouse.Controller().position
+
+        self.log['MOUSE_X'] = mouse.Controller().position[0]
+        self.log['MOUSE_Y'] = mouse.Controller().position[1]
         self.queue.append(self.log.copy())
 
         self.log['LEFT_CLICKS'] = 0
