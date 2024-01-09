@@ -42,7 +42,7 @@ class CompleteMonitor:
             stats_data = self.stats_monitor.queue.pop()
 
             self.log = {**self.log, **stats_data, **mouse_data, **keyboard_data}
-            self.lastValues = self.log.values()
+            self.lastValues = self.log
 
             if self.verbose:
                 print(self.log)

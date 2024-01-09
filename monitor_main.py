@@ -1,5 +1,3 @@
-import warnings
-
 from CompleteMonitor import CompleteMonitor
 import time
 import pickle
@@ -14,30 +12,33 @@ def beep():
         winsound.Beep(frequency=1000, duration=300)
 
 
+monitor_only = False
 if __name__ == "__main__":
+    count = 0
     interval = 0.5
     monitor = CompleteMonitor(interval=interval, verbose=False)
     monitor.start_monitor()
-    time.sleep(2)
-    print(monitor.get_realTime_data())
     try:
-        with open('ML/TrainedModels/RandomForest.pkl', 'rb') as file:
-            classifier = pickle.load(file)
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore")
+        if not monitor_only:
+            time.sleep(2)
+            with open('ML/TrainedModels/RandomForest.pkl', 'rb') as file:
+                classifier = pickle.load(file)
                 while True:
                     pred = classifier.predict(monitor.get_realTime_data())
                     print(pred)
-                    if pred == 1:
-                        count += 1
-                    else:
-                        count = 0
-                    if count >= 30:
+                    count = count + 1 if pred == 1 else 0
+                    if count >= 6:
                         beep()
                     time.sleep(interval)
+        else:
+            try:
+                while True:
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                monitor.stop()
+                print("stopped")
+
     except KeyboardInterrupt:
         monitor.stop()
         print("Monitoring stopped by user.")
-
-
 
