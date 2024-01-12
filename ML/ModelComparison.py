@@ -27,7 +27,7 @@ save_models = False
 names = ['RandomForest', 'KNeighbors', 'GaussianNB', 'LinearDiscriminantAnalysis', 'LogisticRegression', 'MultiLayerPerceptron']
 save_path_img = 'C:/Users/pippo/PycharmProjects/DCML_Project/Images/tryagain'
 save_path_models = 'C:/Users/pippo/PycharmProjects/DCML_Project/ML/TrainedModels'
-classifiers = [RandomForestClassifier(), KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
+classifiers = [RandomForestClassifier(min_samples_split=30, min_impurity_decrease=0.01), KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
 predictions = []
 reports = []
 
