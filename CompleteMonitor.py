@@ -26,8 +26,6 @@ class CompleteMonitor:
 
         self.arrest = False
 
-        self.data_history = []
-
     def start_monitor(self):
         self.writer.writeheader()
         self.keyboard_monitor.start()
@@ -46,9 +44,6 @@ class CompleteMonitor:
             self.log = {**self.log, **stats_data, **mouse_data, **keyboard_data}
             self.lastValues = self.log
 
-            self.data_history.append(self.lastValues)
-            self.data_history = self.data_history[-10:]
-
             if self.verbose:
                 print(self.log)
 
@@ -62,7 +57,7 @@ class CompleteMonitor:
         Timer(self.interval, self.write_row).start()
 
     def get_realTime_data(self):
-        return pd.DataFrame(self.data_history)
+        return pd.DataFrame([self.lastValues])
 
     def stop(self):
         self.arrest = True

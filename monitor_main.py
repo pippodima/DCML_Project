@@ -15,8 +15,8 @@ def beep():
 monitor_only = False
 if __name__ == "__main__":
     count = 0
-    interval = 0.1
-    monitor = CompleteMonitor(interval=interval, verbose=True)
+    interval = 0.5
+    monitor = CompleteMonitor(interval=interval, verbose=False)
     monitor.start_monitor()
     try:
         if not monitor_only:
@@ -24,12 +24,12 @@ if __name__ == "__main__":
             with open('ML/TrainedModels/RandomForest.pkl', 'rb') as file:
                 classifier = pickle.load(file)
                 while True:
-                    time.sleep(interval*10)
                     pred = classifier.predict(monitor.get_realTime_data())
                     print(pred)
-                    count = count + 1 if sum(pred) >= 5 else 0
-                    if count >= 2:
+                    count = count + 1 if pred == 1 else 0
+                    if count >= 6:
                         beep()
+                    time.sleep(interval)
         else:
             try:
                 while True:
