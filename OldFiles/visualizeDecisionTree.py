@@ -4,21 +4,25 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.tree import export_graphviz
 import graphviz as gv
+import os
+os.environ["PATH"] += os.pathsep + 'C:/Program Files/Graphviz/bin'
 
-df = pd.read_csv('/Users/pippodima/Documents/Uni/Magistrale/DCML/Progetto_DCML/ML/Data/dataset.csv')
-X = df[['CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
+# df = pd.read_csv('/Users/pippodima/Documents/Uni/Magistrale/DCML/Progetto_DCML/ML/Data/dataset.csv')
+df = pd.read_csv("C:/Users/pippo/PycharmProjects/DCML_Project/ML/Data/dataset.csv")
+X = df[['MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
 Y = df['anomaly']
 x_Train, x_Test, y_Train, y_Test = train_test_split(X, Y, test_size=0.2, shuffle=True, random_state=42)
 
 
-classifier = DecisionTreeClassifier(min_samples_split=30, min_impurity_decrease=0.01)
+# classifier = DecisionTreeClassifier(min_samples_split=30, min_impurity_decrease=0.005)
+classifier = DecisionTreeClassifier(max_depth=8)
 # classifier = DecisionTreeClassifier()
 classifier.fit(x_Test, y_Test)
 
 
 # Export the decision tree to DOT format
 dot_data = export_graphviz(classifier, out_file=None,
-                           feature_names=['CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl'],
+                           feature_names=['MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl'],
                            class_names=['0', '1'],
                            filled=True, rounded=True,
                            special_characters=True)
