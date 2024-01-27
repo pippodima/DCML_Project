@@ -63,8 +63,8 @@ x_Train, x_Test, y_Train, y_Test = train_test_split(X, Y, test_size=0.2, shuffle
 
 
 
-classifier = DecisionTreeClassifier(min_samples_split=30, min_impurity_decrease=0.01)  # (0.74 distance vs 0.69 x,y)
-# classifier = DecisionTreeClassifier(max_depth=8)
+# classifier = DecisionTreeClassifier(min_samples_split=30, min_impurity_decrease=0.01)  # (0.74 distance vs 0.69 x,y)
+classifier = DecisionTreeClassifier(max_depth=8)
 # classifier = DecisionTreeClassifier()
 classifier.fit(x_Test, y_Test)
 
