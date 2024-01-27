@@ -41,7 +41,7 @@ class CompleteMonitor:
             mouse_data = self.mouse_monitor.queue.pop()
             stats_data = self.stats_monitor.queue.pop()
 
-            self.log = {**self.log, **stats_data, **mouse_data, **keyboard_data}
+            self.log = {**self.log, **mouse_data, **keyboard_data} #add **stats_data to add cpu and ram statistic
             self.lastValues = self.log
 
             if self.verbose:

@@ -23,16 +23,16 @@ random.seed(random_seed)
 
 save_img = False
 show_img = True
-save_models = False
+save_models = True
 names = ['RandomForest', 'KNeighbors', 'GaussianNB', 'LinearDiscriminantAnalysis', 'LogisticRegression', 'MultiLayerPerceptron']
 save_path_img = 'C:/Users/pippo/PycharmProjects/DCML_Project/Images/tryagain'
-save_path_models = 'C:/Users/pippo/PycharmProjects/DCML_Project/ML/TrainedModels'
-classifiers = [RandomForestClassifier(min_samples_split=30, min_impurity_decrease=0.01), KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
+save_path_models = 'C:/Users/pippo/PycharmProjects/DCML_Project/ML/TrainedModelsNoCPU_RAM'
+classifiers = [RandomForestClassifier(max_depth=8), KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
 predictions = []
 reports = []
 
 df = pd.read_csv('Data/dataset.csv')
-X = df[['CPU', 'MEMORY', 'MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
+X = df[['MOUSE_X', 'MOUSE_Y', 'LEFT_CLICKS', 'RIGHT_CLICKS', 'q', 'w', 'e', 'r', 't', 'd', 'f', 'tab', 'space', 'ctrl']]
 Y = df['anomaly']
 x_Train, x_Test, y_Train, y_Test = train_test_split(X, Y, test_size=0.2, shuffle=True, random_state=random_seed)
 

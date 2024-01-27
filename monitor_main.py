@@ -21,13 +21,13 @@ if __name__ == "__main__":
     try:
         if not monitor_only:
             time.sleep(2)
-            with open('ML/TrainedModels/RandomForest.pkl', 'rb') as file:
+            with open('ML/TrainedModelsNoCPU_RAM/RandomForest.pkl', 'rb') as file:
                 classifier = pickle.load(file)
                 while True:
                     pred = classifier.predict(monitor.get_realTime_data())
                     print(pred)
                     count = count + 1 if pred == 1 else 0
-                    if count >= 6:
+                    if count >= 5:
                         beep()
                     time.sleep(interval)
         else:
