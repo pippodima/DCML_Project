@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # GamePlayStyle Classifier (DCML Project)
 
 ## Description
