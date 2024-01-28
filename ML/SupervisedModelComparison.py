@@ -21,14 +21,14 @@ random_seed = 42
 np.random.seed(random_seed)
 random.seed(random_seed)
 
-save_img = True
+save_img = False
 show_img = True
 save_models = False
 
 names = ['RandomForest', 'KNeighbors', 'GaussianNB', 'LinearDiscriminantAnalysis', 'LogisticRegression', 'MultiLayerPerceptron']
 save_path_img = 'C:/Users/pippo/PycharmProjects/DCML_Project/Images/parameter/asd'
 save_path_models = 'C:/Users/pippo/PycharmProjects/DCML_Project/ML/TrainedModelsNoCPU_RAM'
-classifiers = [RandomForestClassifier(max_depth=8)]  # , KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
+classifiers = [RandomForestClassifier(max_depth=8), KNeighborsClassifier(), GaussianNB(), LinearDiscriminantAnalysis(), LogisticRegression(max_iter=500), MLPClassifier()]
 predictions = []
 reports = []
 
