@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GamePlayStyle Classifier (DCML Project)
 
 ## Description
@@ -27,3 +28,6 @@ create the dataset. go to ML/prepareDataset and put the names of the games file(
 4. go to main again and change the `monitor_only` variable to `False` and adjust the paths before running
 5. now it should print in your console `[0]` or `[1]` if the player is normal or anomaly. If it reads anomaly for more than
 2.5 seconds it will play a beep sound until it become again a `[0]`
+=======
+# go to master branch
+>>>>>>> 8678f370659d3acfef5cbfb7b38e3b3324c21e96
