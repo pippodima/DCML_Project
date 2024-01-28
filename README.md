@@ -6,7 +6,7 @@ on their mouse and keyboard actions. By analyzing the patterns of mouse movement
 employs machine learning techniques to distinguish between different play styles.
 
 ## Installation
-1. Clone the repository to your local machine: git clone https://github.com/pippodima/DCML_Project/tree/master
+1. Clone the repository to your local machine: git clone https://github.com/pippodima/DCML_Project
 2. navigate to the project directory
 3. install the required dependencies using pip (see `requirements.txt` for full list)
 
