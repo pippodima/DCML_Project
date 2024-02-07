@@ -5,6 +5,8 @@ import subprocess
 import winsound
 
 monitor_only = False
+count = 0
+interval = 0.5
 
 
 def beep():
@@ -15,8 +17,6 @@ def beep():
 
 
 if __name__ == "__main__":
-    count = 0
-    interval = 0.5
     monitor = CompleteMonitor(interval=interval, verbose=False)
     monitor.start_monitor()
     try:
